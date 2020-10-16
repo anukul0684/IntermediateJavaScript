@@ -1,0 +1,233 @@
+<!doctype html>
+
+
+<html lang="en">
+  <head>
+    <title>21128_2001_assignment2_Kulshrestha_Anu_CookieWrite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <!--
+
+    ///////////////////////////////////////////////////////////////////////
+    //                                                                   //
+    //                  Program Name: Web Development                    //
+    //                   Course Name: Intermediate JavaScript            //
+    //                         Batch: WDD7 - Jan 2020                    //
+    //                    Instructor: Brent Scott                        //
+    //               Assignment No. : 2                                  // 
+    //                                                                   //
+    //                  Submitted by: Anu Kulshrestha                    //
+    //                                                                   //
+    ///////////////////////////////////////////////////////////////////////
+
+    -->
+    <style>
+      /* Set CSS for whole page */
+      body{
+        font-family: Lora, 'Gabriola', serif;
+        font-size: 16px;
+        font-weight: 400;
+      }
+      /* Set CSS for h1 tag */
+      h1{
+        font-weight: 700;
+      }
+      h2{
+        display: inline-block;
+      }
+      /* Set CSS for all lable tags */
+      label{
+        float: left;
+        text-align: right;
+        width: 150px;
+        margin-left: 10px;
+        margin-right: 5px;
+      }
+      /* Set CSS for all text boxes */
+      input[type="text"]{
+        width: 200px;
+      }
+      /* Set CSS for all button tags */
+      button{
+        font-family: Lora, 'Gabriola', serif;
+        padding: 5px;
+      }
+      /* Set CSS for first button tag */
+      button:first-of-type{
+        float: left;
+        margin-left: 50px;
+        margin-right: 10px;
+      }
+      /* Set CSS for anchor tag */
+      a{
+        text-decoration-line: none;
+        color: #000;
+        display: inline-block;
+        padding: 10px;
+        margin: 10px;
+        border: 1px solid #000;
+        background-color: #ccc;
+        margin-left: 50px;
+      }
+      
+    </style>
+    
+  </head>
+
+  <body>
+    <h1>Company Management</h1>
+    <div id = "style_date"><h2>Today's Date: </h2></div>
+    <p>Add Companies with Job Postings. </p>
+    <p>Please Note: Fields with &#42; symbol are required fields.</p>
+    
+    <p>
+      <label for="company_name">Company Name<sup>*</sup> : </label>
+      <input type="text" id="company_name" name="company_name"/>
+    </p>
+    <p>
+      <label for="job_title">Job Title<sup>*</sup> : </label>
+      <input type="text" id="job_title" name="job_title"/>
+    </p>
+    <p>
+      <label for="job_details">Job Details<sup>*</sup> : </label>
+      <input type="text" id="job_details" name="job_details"/>
+    </p>
+    <p>
+      <label for="company_address">Address : </label>
+      <input type="text" id="company_address" name="company_address"/>
+    </p>
+    <p>
+      <label for="company_city">City : </label>
+      <input type="text" id="company_city" name="company_city"/>
+    </p>
+    <p>
+      <label for="contact_number">Contact No.<sup>*</sup> : </label>
+      <input type="text" id="contact_number" name="contact_number"/>
+    </p>
+    <p>
+      <button onclick="submitCookie();">Add Details as Cookie</button>
+      <button onclick="clearPage();">Clear Field Details</button>      
+    </p>
+    <p>
+      <a href="21128_2001_assignment2_Kulshrestha_Anu_CookieRead.html">View All Companies Added to Cookie</a>
+    </p>
+    <script>
+      //JS Code Below
+      //Global variable declaration
+      
+      //flag variable for required fields to be filled in form
+      var filled_status = true;
+      var cookie_counter = 1;
+      
+      //anonymous function while page loads.
+      onload = function(){
+        //show current date
+        var today_complete_date = new Date();
+        var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var today_day = DAYS[today_complete_date.getDay()];
+        var today_month = MONTHS[today_complete_date.getMonth()];
+        var today_date = today_complete_date.getDate();
+        var today_year = today_complete_date.getFullYear();
+        document.getElementById("style_date").innerHTML += " <h2>" + today_day + ", " + today_month + " " + today_date + ", " + today_year + "</h2>";
+        
+        //here we are trying to set the counter for number of cookies, if present to add further
+        if(document.cookie!=''){
+          var all_cookies = document.cookie;
+          var all_cookie_count = all_cookies.split(";");
+          cookie_counter = all_cookie_count.length + 1;           
+        }
+        //else we set it to one if no previously added cookies are present.
+        else{
+          cookie_counter = 1;          
+        }
+      }
+      
+      //function to check the empty fields in mandatory fields
+      function checkForm(){
+        //create an array to get the details of required fields
+        var required_fields = new Array();
+        //add value of ids to the array items 
+        required_fields[0]=document.getElementById("company_name").value;
+        required_fields[1]=document.getElementById("job_title").value;
+        required_fields[2]=document.getElementById("job_details").value;
+        required_fields[3]=document.getElementById("contact_number").value;     
+          
+        //check the array fields for empty content, if any
+        for (i=0; i<required_fields.length;i++){
+          //check if any of the array item is empty
+          if(required_fields[i] == ""){
+            //if found empty, mark the filled flag false and break the loop           
+            filled_status = false;
+            break;
+          }
+        }        
+        //return the bool value of the flag as a reply to this function.
+        return filled_status;        
+      }
+        
+      //function to add cookie
+      function submitCookie(){
+        //variable to check the required fields, if empty
+        var get_status = checkForm();
+        //variable to create current date
+        var current_date = new Date();        
+        var current_year = current_date.getFullYear();
+        
+        //variable to add 2 years to current date for setting expiry date
+        var expiry_date = new Date();
+        //set the expiry date to +2 years.
+        expiry_date.setFullYear(current_year + 2);
+        
+        //check if all required fields are added by user.
+        if(get_status==true){  
+          //if added, get all the values to variables for further process of creating a cookie
+          var comp_name = document.getElementById("company_name").value;
+          var job_name = document.getElementById("job_title").value;
+          var job_desc = document.getElementById("job_details").value;
+          var comp_address = document.getElementById("company_address").value;
+          var comp_city = document.getElementById("company_city").value;
+          var comp_number = document.getElementById("contact_number").value;
+          
+          //alert(comp_name + ", " + job_name + ", " + job_desc + ", " + comp_address + ", " + comp_city + ", " + comp_number + ", " + expiry_date);
+         
+          //if the not required fields are not added by user, enter "Not Provided
+          if(comp_address=="" || comp_address==null){              
+            comp_address = "Not Provided";
+          }
+          //if the not required fields are not added by user, enter "Not Provided
+          if(comp_city=="" || comp_city==null){
+            comp_city = "Not Provided";
+          }
+          
+          //concatenate it to a new cookie name.
+          var cookie_collection ="comp_name::" + comp_name + "--job_name::" + job_name + "--job_details::" + job_desc + "--comp_address::" + comp_address + "--comp_city::" + comp_city + "--comp_number::" + comp_number ;
+          //encode this text into a cookie friendly format.
+          //alert(cookie_collection);
+          var make_cookie = encodeURIComponent(cookie_collection); 
+          make_cookie = make_cookie + ";expires=" + expiry_date.toUTCString()
+          //put all that into the document.cookie object.
+          document.cookie = "my_company" + cookie_counter + "=" + make_cookie;
+          //alert(document.cookie);     
+          cookie_counter += 1;
+          alert("Company Details Added.");
+        }    
+        //if required fields are not added by user, inform user and ask for filling them.
+        else{
+          alert("You have not filled all required form fields. Please enter all fields with * symbol");
+          return false;
+        }
+      }
+      //Clear all the text boxes to reenter. 
+      function clearPage(){
+        document.getElementById("company_name").value = "";
+        document.getElementById("job_title").value = "";
+        document.getElementById("job_details").value = "";
+        document.getElementById("company_address").value = "";
+        document.getElementById("company_city").value = "";
+        document.getElementById("contact_number").value = "";
+      }
+    </script>
+    </body>
+</html>

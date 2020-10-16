@@ -1,0 +1,203 @@
+<!doctype html>
+
+
+<html lang="en">
+  <head>
+    <title>21128_2001_assignment2_Kulshrestha_Anu_CookieRead</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <!--
+
+    ///////////////////////////////////////////////////////////////////////
+    //                                                                   //
+    //                  Program Name: Web Development                    //
+    //                   Course Name: Intermediate JavaScript            //
+    //                         Batch: WDD7 - Jan 2020                    //
+    //                    Instructor: Brent Scott                        //
+    //               Assignment No. : 2                                  // 
+    //                                                                   //
+    //                  Submitted by: Anu Kulshrestha                    //
+    //                                                                   //
+    ///////////////////////////////////////////////////////////////////////
+
+    -->
+    <style>
+      /* Set CSS for whole page */
+      body{
+        font-family: Lora, 'Gabriola', serif;
+        font-size: 16px;
+        font-weight: 400;
+      }
+      /* Set CSS for anchor tag */
+      a{
+        text-decoration-line: none;
+        color: #000;
+        display: inline-block;
+        width: 250px;
+        padding: 10px;
+        margin: 10px;
+        border: 1px solid #000;
+        background-color: #ccc;
+        margin-left: 20px;
+        text-align: center;
+      }
+      /* Set CSS for select tag */
+      select{
+        padding: 10px 15px 10px 15px;
+        margin-left: 20px;
+      }
+      /* Set CSS for h1 tag*/
+      h1{
+        font-weight: 700;
+      }
+      h2{
+        display: inline-block;
+      }
+    </style>
+    <script>
+      //page has loaded
+      var cookie_collection_array;
+      var expire_dt_array;
+      var expire_dt;
+      //Anonymous function for when the page is loaded
+      window.onload=function(){
+        var today_complete_date = new Date();
+        var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var today_day = DAYS[today_complete_date.getDay()];
+        var today_month = MONTHS[today_complete_date.getMonth()];
+        var today_date = today_complete_date.getDate();
+        var today_year = today_complete_date.getFullYear();
+        document.getElementById("style_date").innerHTML += " <h2>" + today_day + ", " + today_month + " " + today_date + ", " + today_year + "</h2>";
+        
+        // set the select menu back to the first option, the description.
+        //alert(document.cookie);
+        fillCookie();
+        
+      }
+      
+      //fill the dropdown
+      function fillCookie(){
+        if(document.cookie!='')
+        {
+          //alert(document.cookie);
+          //get the cookie into a variable
+          var get_complete_cookie = document.cookie;
+          
+          //break the cookie into seperate cookies
+          
+          cookie_collection_array = decodeURIComponent(get_complete_cookie).split(";");
+          for(i=0;i<cookie_collection_array.length;i++){
+            alert(cookie_collection_array[i]);
+          }
+         
+          var company_id = new Array();
+          var company_name = new Array();
+          for(i=0;i<cookie_collection_array.length;i++){
+            company_id[i] = i;
+            company_name[i] = cookie_collection_array[i].split("=")[1].split("--")[0].split("::")[1];
+          }                 
+          
+          var list_item = document.getElementById("company_cookie");
+          for(var i=0;i<cookie_collection_array.length;i++)
+          {
+            list_item.options[list_item.options.length] = new Option(company_name[i], (i+1));            
+          }                 
+        }    
+        else{
+          alert("Go back and add Company details to view it here.");
+        }
+      }     
+      //show the selected cookie
+      function readCookie(selected_cookie){               
+        var the_selected_cookie = selected_cookie.options[selected_cookie.selectedIndex].value;        
+        if(the_selected_cookie!=0){          
+          viewCookieDetails(the_selected_cookie);
+        }
+        else{
+          div_object.innerHTML = "Select from the above options to view details.";
+        }
+      }
+      
+      //global variable to get the expires date and show to user.
+      
+      
+      //function to get the cookie details
+      function viewCookieDetails(cookie_id){     
+        cookie_id -= 1;
+        var cookie_exists = cookie_collection_array[cookie_id];
+        alert(cookie_exists);             
+         
+        var split_cookie = cookie_exists.split("=");
+        var cookie_details = split_cookie[1];         
+
+        var split_cookie_array = cookie_details.split("--");
+
+        var split_name_value = new Array();
+        
+        for(var i=0;i<split_cookie_array.length;i++)
+        {
+          var split_pair = split_cookie_array[i].split("::");
+          var info_name = split_pair[0];
+          var info_value = split_pair[1];          
+          split_name_value[info_name] = info_value;            
+        }
+
+        var div_object = document.getElementById("cookie_values");
+        div_object.innerHTML = "Company Name: " + split_name_value["comp_name"] + "<br />";
+        div_object.innerHTML += "Job Title: " + split_name_value["job_name"] + "<br />";
+        div_object.innerHTML += "Job Details: " + split_name_value["job_details"] + "<br />";
+        div_object.innerHTML += "Address: " + split_name_value["comp_address"] + "<br />";
+        div_object.innerHTML += "City: " + split_name_value["comp_city"] + "<br />";
+        div_object.innerHTML += "Contact Number: " + split_name_value["comp_number"] + "<br />";
+        //div_object.innerHTML += "Details will expire on: " + expire_dt + "<br />";
+
+      }      
+        
+      //function to delete cookie
+      function delete_cookie()
+      {
+        //to delete a cookie, set its expiry date to any point in the past.
+        var past_date = new Date();
+        //set the month day year etc whichever you want to something in past
+        past_date.setDate(past_date.getDate() - 1);
+        //alert(past_date);
+        var the_selected_cookie = document.getElementById("company_cookie");
+        var show_val = the_selected_cookie.options[the_selected_cookie.selectedIndex].value;
+        
+        if(the_selected_cookie.selectedIndex!=0){                
+          show_val -= 1;
+          var remove_cookie = decodeURIComponent(cookie_collection_array[show_val]).split(";");
+          var create_data = remove_cookie[0] + ";expires=" + past_date.toUTCString();
+          document.cookie = create_data;
+          alert("Company details deleted.");
+          location.reload(); 
+        }
+        else
+        {
+          alert("To delete a company detail, please select a company");
+        }        
+      }
+    </script>
+  </head>
+
+  <body>
+    <h1>View and Delete Company Details</h1>
+    <div id = "style_date"><h2>Today's Date: </h2></div>
+    <p>Select to see company's job details!</p>
+    <p>
+      <select name="company_cookie" id = "company_cookie" onchange="readCookie(this);" >
+        <option value="0">Please select company</option>             
+      </select>      
+    </p>
+    <div id="cookie_values">
+      Select from the above options to view details.
+    </div>
+    <p>
+      <a href="21128_2001_assignment2_Kulshrestha_Anu_CookieWrite.html">Go Back</a>  
+      <a href="javascript:;" onclick="delete_cookie();">Delete Selected Company</a>    
+    </p>
+    
+  </body>
+</html>
