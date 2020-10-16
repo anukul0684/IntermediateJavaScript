@@ -1,0 +1,555 @@
+<!doctype html>
+
+
+<html lang="en">
+  <head>
+    <title>21128_2001_assignment3_Kulshrestha_Anu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8" />
+    <!--
+
+    ///////////////////////////////////////////////////////////////////////
+    //                                                                   //
+    //                  Program Name: Web Development                    //
+    //                   Course Name: Intermediate JavaScript            //
+    //                         Batch: WDD7 - Jan 2020                    //
+    //                    Instructor: Brent Scott                        //
+    //               Assignment No. : 3                                  // 
+    //                                                                   //
+    //                  Submitted by: Anu Kulshrestha                    //
+    //                                                                   //
+    ///////////////////////////////////////////////////////////////////////
+
+    -->
+    <style>
+      /* Set CSS for whole page */
+      body{
+        font-family: Lora, 'Gabriola', serif;
+        font-size: 16px;
+        font-weight: 400;
+        background-color: #F5F5F5;
+      }
+      
+      /* Set CSS for main div of the web page */
+      #wrapper{
+        max-width: 960px;
+        margin: 0 auto;    
+        transition: all 1s ease-in-out;
+        box-sizing: border-box;
+        position: relative;
+        padding-top: 1px;
+      }     
+      
+      /* Set CSS for p tag having logo image */
+      p#logo{
+        margin-top: 0;
+        margin-bottom: 0;
+        display: inline-block;
+        float: left;        
+      }  
+      
+      /* Set CSS for logo image */
+      p#logo img{
+        border-radius: 10px;
+      }
+      
+      /* Set CSS for h1 tag having the heading of the webpage */
+      h1{        
+        float: left;
+        font-weight: 700;
+        display: inline-block;   
+        margin-top: 40px;
+        margin-bottom: 0;
+        padding-left: 10px;
+        box-sizing: border-box;
+      }
+      
+      /* Set CSS for div tag having the current date */  
+      #style_date{
+        margin-top: 0;
+        clear: both;
+        text-align: right;
+        background-color: #ADD8E6;
+        box-sizing: border-box;
+        padding-right: 10px;
+      }
+      
+      /* Set CSS for h2 tag having the current date */
+      h2{
+        display: inline-block;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      /* Set CSS for h3 tag having the buttons to change text size of the page */
+      h3{
+        background-color: #ADD8E6;
+        margin: 0;
+        padding: 5px;
+        box-sizing: border-box;
+      }
+      
+      /* Set CSS for buttons to change text size of the page */
+      h3 button{
+        padding: 5px 15px 5px 15px;
+        border-radius: 10px;
+      }
+      
+      /* Set CSS for hover on buttons to change text size of the page */
+      h3 button:hover{
+        background-color: #000;
+        color: #fff;
+      }
+      
+      /* Set CSS for main navigation bar of the page */
+      #navigation_menu{
+        font-family: Lora, 'Gabriola', serif;
+        border: 1px solid #000;
+        background-color: #ADD8E6;
+        box-sizing: border-box;
+        height: 650px;
+      }
+      
+      /* Set CSS for list items of the main navigation menu */
+      #navigation_menu li{
+        border-radius: 10px;
+        margin-bottom: 4px;       
+      }
+      
+      /* Set CSS for button that is to be clicked for sliding message box */
+      #sliding_box{
+        padding: 5px 10px;
+        border-radius: 10px;
+        box-shadow: 4px 4px 6px rgba(0,0,0,0.8);
+      }
+      
+      /* Set CSS for sliding message box */
+      #slide_green_box{
+        margin-top: 10px;
+        width: 300px;
+        height: 200px;
+        background-color: #7b7;
+        border: 2px solid #000;
+        visibility: hidden;  
+        text-align: left;
+        box-sizing: border-box;
+      }     
+      
+      /* Set CSS for X anchor tag for closing message box */
+      #slide_green_box a{
+        float: right;
+        margin-right: 5px;
+        font-weight: bold;
+        text-decoration: none;
+        display: inline-block;
+        border: 1px solid #000;
+        padding: 5px 8px;
+        margin: 5px;
+        border-radius: 50%;
+        font-size: 0.9em;        
+      }
+      
+      /* Set CSS for p tag having message in message box */
+      #slide_green_box p{
+        float: left;
+        margin: 20px;        
+      }
+      
+      /* Set CSS for main div in 2nd list item in main navigation */
+      #create_designs{
+        text-align: center;
+      }
+      
+      /* Set CSS for main div having all divs that have images for 2nd list item of main navigation */
+      #all_designs{
+        position: absolute;
+        top: 350px;
+        left: 150px;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+        width: 80%;       
+        flex-wrap: wrap;
+      }
+      
+      /* Set CSS for all divs that have images for 2nd list item of main navigation */
+      .choose_design{
+        margin: 0;
+        margin: 5px;        
+      } 
+      
+      /* Set CSS for unordered list item in div for 3rd list item of main navigation */
+      #make_albums ul{
+        font-family: Lora, 'Gabriola', serif;
+        font-size: 0.7em;
+      }
+      
+      /* Set CSS for div for 4th list item of main navigation */
+      #about_us{
+        box-sizing: border-box;
+      }
+      
+      /* Set CSS for div for 4th list item of main navigation */
+      #about_us p{
+        padding: 10px 40px;
+      }
+      
+      /* Set CSS for all label tags in div for last item of main navigation*/
+      label{
+        float: left;
+        text-align: right;
+        width: 200px;
+        margin-left: 180px;
+        margin-right: 5px;
+      }
+      
+      /* Set CSS for all text boxes in div for last item of main navigation */
+      input[type="text"]{
+        width: 180px;
+      }
+      
+      /* Set CSS for all button tags in div for last item of main navigation */
+      button#submit_form, button#clear_form{
+        font-family: Lora, 'Gabriola', serif;
+        padding: 5px;
+        width: 150px;
+      }
+      /* Set CSS for first button tag in div for last item of main navigation */
+      button#submit_form{
+        float: left;
+        margin-left: 300px;
+        margin-right: 10px;
+      }           
+      
+    </style>
+    <script>
+      //page has loaded
+      onload = function(){
+        //show current date
+        var today_complete_date = new Date();
+        var MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        var DAYS = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        var today_day = DAYS[today_complete_date.getDay()];
+        var today_month = MONTHS[today_complete_date.getMonth()];
+        var today_date = today_complete_date.getDate();
+        var today_year = today_complete_date.getFullYear();
+        document.getElementById("style_date").innerHTML += " <h2>" + today_day + ", " + today_month + " " + today_date + ", " + today_year + "</h2>";
+      }
+      
+      //Clear all the text boxes to re-enter. 
+      function clearPage(){
+        document.getElementById("your_name").value = "";
+        document.getElementById("order_desc").value = "";
+        document.getElementById("email_id").value = "";
+        document.getElementById("mailing_address").value = "";
+        document.getElementById("mailing_city").value = "";
+        document.getElementById("mobile_number").value = "";
+      }
+    </script>
+  </head>
+  <!-- HTML for creating page -->
+  <body>
+    <!-- HTML for main div having all tags inside -->
+    <div id="wrapper">
+      <!-- HTML for p tag that has logo image in it -->
+      <p id="logo">
+        <img src="images/LogoImage.jpg" alt="jQuery website" title="Designers"/>
+      </p>
+      <!-- HTML for h1 tag that has heading of the page -->
+      <h1>Fun with jQuery</h1>
+      <!-- HTML for div tag that has current date on the page -->
+      <div id = "style_date">
+        <h2>Today's Date: </h2>
+      </div>
+      <!-- HTML for h3 tag that has buttons to handle text size on the page -->
+      <h3>Try Different Text Size
+        <button id="small_text">Small</button>
+        <button id="medium_text">Medium</button>
+        <button id="large_text">Large</button>
+      </h3>
+      <!-- HTML for div tag that has main navigation menu data -->
+      <div id="navigation_menu">
+        <!-- HTML for ul tag that has main menu datalist on the page -->
+        <ul>
+          <li><a href="#our_home">Home</a></li>
+          <li><a href="#create_designs">Toggle Designs</a></li>
+          <li><a href="#make_albums">Choose Faces</a></li>
+          <li><a href="#about_us">About Us</a></li>
+          <li><a href="#order_here">Order Here</a></li>
+        </ul>
+        <!-- HTML for div tags that will be shown using jQuery under tabs, when the list item
+            will be clicked above. These divs are binded with their ids to the link in href 
+            of anchor tags present in list items of above ul -->
+        <div id="our_home">
+          <button id="sliding_box">Message for You</button>          
+          <div id="slide_green_box" title="Enjoy jQuery">
+            <a href="javascript:;" class="close_message">X</a>
+            <p>Be a Web Designer. Learn CSS, JavaScript, jQuery thorougly. Practice in your Assignments.</p> 
+          </div>
+        </div>       
+        <div id="create_designs">    
+          <img id="design_gallery" src="images/design1Big.jpg" alt="selected design" width="400" height="270" />      
+          <div id="all_designs">
+            <div class="choose_design"><img id="design1" src="images/design1.jpg" alt="Design 1" title="design 1"/></div>
+            <div class="choose_design"><img id="design2" src="images/design2.jpg" alt="Design 1" title="design 1"/></div>
+            <div class="choose_design"><img id="design3" src="images/design3.jpg" alt="Design 1" title="design 1"/></div>
+            <div class="choose_design"><img id="design4" src="images/design4.jpg" alt="Design 1" title="design 1"/></div>
+            <div class="choose_design"><img id="design5" src="images/design5.jpg" alt="Design 1" title="design 1"/></div>
+            <div class="choose_design"><img id="design6" src="images/design6.jpg" alt="Design 1" title="design 1"/></div>              
+          </div>
+        </div>
+        <div id="make_albums">
+          <ul>
+            <li><a href="#img1">Happy</a></li>
+            <li><a href="#img2">Joyful</a></li>
+            <li><a href="#img3">Cool</a></li>
+            <li><a href="#img4">Mistaken</a></li>
+            <li><a href="#img5">Funny</a></li>
+            <li><a href="#img6">Laugh Out Loud</a></li>
+            <li><a href="#img7">Sad</a></li>
+            <li><a href="#img8">Saint</a></li>
+            <li><a href="#img9">Surprised</a></li>
+            <li><a href="#img10">Upset</a></li>
+            <li><a href="#img11">Wink</a></li>
+            <li><a href="#img12">Yea Right</a></li>
+          </ul>
+          <p>
+            <img id="img1" src="images/happy.jpg" alt="smile" title="happy"/>
+          </p>
+          <p>
+            <img id="img2" src="images/joyful.jpg" alt="joyful" title="very happy"/>
+          </p>
+          <p>
+            <img id="img3" src="images/cool.jpg" alt="cool" title="cool"/>
+          </p>
+          <p>
+            <img id="img4" src="images/didAMistake.jpg" alt="did a mistake" title="did a mistake"/>
+          </p>
+          <p>
+            <img id="img5" src="images/funny.jpg" alt="funny" title="funny"/>
+          </p>
+          <p>
+            <img id="img6" src="images/lol.jpg" alt="lol" title="lol"/>
+          </p>
+          <p>
+            <img id="img7" src="images/sad.jpg" alt="sad" title="sad"/>
+          </p>
+          <p>
+            <img id="img8" src="images/saint.jpg" alt="saint" title="saint"/>
+          </p>
+          <p>
+            <img id="img9" src="images/surprised.jpg" alt="surprised" title="surprised"/>
+          </p>
+          <p>
+            <img id="img10" src="images/upset.jpg" alt="upset" title="upset"/>
+          </p>
+          <p>
+            <img id="img11" src="images/winky.jpg" alt="winky" title="winky"/>
+          </p>
+          <p>
+            <img id="img12" src="images/yeaRight.jpg" alt="yeaRight" title="yeaRight"/>
+          </p>        
+        </div>
+        <div id="about_us">
+          <p>
+            jQuery is a fast, small, and feature-rich JavaScript library. 
+            It makes things like HTML document traversal and manipulation, event handling, animation, 
+            and Ajax much simpler with an easy-to-use API that works across a multitude of browsers. 
+            With a combination of versatility and extensibility, jQuery has changed the way that millions 
+            of people write JavaScript.
+          </p>
+        </div>
+        <div id="order_here">
+          <p>
+            <label class="save_label" for="your_name">Full Name<sup>*</sup> : </label>
+            <input type="text" id="your_name" name="your_name"/>
+          </p>
+          <p>
+            <label class="save_label" for="order_desc">Order Description<sup>*</sup> : </label>
+            <input type="text" id="order_desc" name="order_desc"/>
+          </p>
+          <p>
+            <label class="save_label" for="email_id">Email Id<sup>*</sup> : </label>
+            <input type="text" id="email_id" name="email_id"/>
+          </p>
+          <p>
+            <label class="save_label" for="mailing_address">Address : </label>
+            <input type="text" id="mailing_address" name="mailing_address"/>
+          </p>
+          <p>
+            <label class="save_label" for="mailing_city">City : </label>
+            <input type="text" id="mailing_city" name="mailing_city"/>
+          </p>
+          <p>
+            <label class="save_label" for="mobile_number">Contact No.<sup>*</sup> : </label>
+            <input type="text" id="mobile_number" name="mobile_number"/>
+          </p>
+          <p>
+            <button id="submit_form" onclick="window.location ='http://scott-media.com/test/form_display.php';">Submit</button>
+            <button id="clear_form" onclick="clearPage();">Reset</button>      
+          </p>
+        </div>
+      </div>
+    </div>
+    
+    <!-- jQuery from a CDN -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+    <!-- jQuery snippet for jQuery UI-->
+    <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    
+    <script>  
+      //Global variables
+      var all_div;
+      var current_text_size;
+      var toggle_flag = false;
+      
+      //function to get the current font size of the page of all divs
+      function get_fontsize(){
+        all_div = document.getElementsByTagName("div");
+        current_text_size = window.getComputedStyle(all_div[0]).getPropertyValue("font-size");
+      }
+      
+      //load the jQuery
+      $(document).ready(function(){         
+        
+        //let the desired ul tag element to work in tabs
+        $("#navigation_menu").tabs({
+          active: 0
+        });
+        
+        //using jQuery function to slide a box
+        $("#sliding_box").click(function(){
+          document.getElementById("slide_green_box").style.visibility = "visible";
+          setTimeout($("#slide_green_box").fadeIn(300),8000);
+          $("#slide_green_box").animate({
+            marginLeft: '250px', 
+            opacity: "0.5",
+            transition: "all .8s ease-out",
+            height: "300px",
+            width: "400px"
+          });                    
+        });       
+        
+        //using jQuery function to show effects when the close 'X' is hovered on message box
+        $('.close_message').hover(function(){
+          $('.close_message').css({
+            backgroundColor: "#000",
+            color: "#fff"
+          });
+          $("#slide_green_box").css({
+            opacity: "0.9",
+            transition: "all .5s ease-in-out"            
+          });
+        });
+        
+        //using jQuery function to get back to original CSS when the message box is hovered out 
+        $('#slide_green_box').mouseleave(function(){
+          $('.close_message').css({
+            backgroundColor: "#7b7",
+            color: "#000"
+          });
+          $("#slide_green_box").css({
+            opacity: "0.5"
+          });
+        });
+        
+        //using jQuery function to close the message box
+        $('.close_message').click(function(){  
+          $("#slide_green_box").fadeOut(400);
+          $("#slide_green_box").animate({
+            marginLeft: '0', 
+            opacity: "1",
+            height: "200px",
+            width: "300px"
+          });                               
+        });
+        
+        //using jQuery function making font-size of the text on page to 12px
+        $("#small_text").click(function(){   
+          get_fontsize();
+          current_text_size = parseInt(current_text_size);
+          if(current_text_size != 12){
+            current_text_size = 12;
+          }                      
+          var small_text = current_text_size + "px";          
+          $("#wrapper").css({
+            fontSize: small_text,
+            transition: "all 1s ease-in-out" 
+          });
+        });
+        
+        //using jQuery function making font-size of the text on page to 16px
+        $("#medium_text").click(function(){                     
+          var medium_text = "16px";            
+          $("#wrapper").css({
+            fontSize: medium_text,
+            transition: "all 1s ease-in-out" 
+          });
+        });
+        
+        //using jQuery function making font-size of the text on page to 20px
+        $("#large_text").click(function(){
+          get_fontsize();
+          current_text_size = parseInt(current_text_size);
+          if(current_text_size != 20){
+            current_text_size = 20; 
+          }                    
+          var large_text = current_text_size + "px";         
+          $("#wrapper").css({
+            fontSize: large_text,
+            transition: "all 1s ease-in-out"            
+          });          
+          $(".save_label").css({
+            marginLeft: "0",
+            width: "300px"
+          })
+        });
+        
+        //using jQuery function for selecting the image1 for toggle
+        $('#design1').click(function(){         
+          $("#design_gallery").attr("src", "images/design1Big.jpg");
+          $("#design_gallery").slideToggle(1000);            
+        });
+        
+        //using jQuery function for selecting the image2 for toggle
+        $('#design2').click(function(){          
+          $("#design_gallery").attr("src", "images/design2Big.jpg");  
+          $("#design_gallery").slideToggle(1000);  
+        });
+        
+        //using jQuery function for selecting the image3 for toggle
+        $('#design3').click(function(){          
+          $("#design_gallery").attr("src", "images/design3Big.jpg");  
+          $("#design_gallery").slideToggle(1000);  
+        });
+        
+        //using jQuery function for selecting the image4 for toggle
+        $('#design4').click(function(){          
+          $("#design_gallery").attr("src", "images/design4Big.jpg");  
+          $("#design_gallery").slideToggle(1000);  
+        });
+        
+        //using jQuery function for selecting the image5 for toggle
+        $('#design5').click(function(){          
+          $("#design_gallery").attr("src", "images/design5Big.jpg");  
+          $("#design_gallery").slideToggle(1000);  
+        });
+        
+        //using jQuery function for selecting the image6 for toggle
+        $('#design6').click(function(){          
+          $("#design_gallery").attr("src", "images/design6Big.jpg");  
+          $("#design_gallery").slideToggle(1000);  
+        });
+          
+        //showing the emojis for "Choose Faces" with the .tabs feature of jQuery UI on page
+        $("#make_albums").tabs({
+          active: 0
+        });
+      });
+    </script>
+    </body>
+</html>
